@@ -14,7 +14,7 @@ app.service('FlowServiceV1', ['$http', function ($http) {
         });
     };
 
-    this.newRule = function (rule) {
+    /*this.newRule = function (rule) {
         var param = {
             resource: rule.resource,
             limitApp: rule.limitApp,
@@ -32,6 +32,29 @@ app.service('FlowServiceV1', ['$http', function ($http) {
 
         return $http({
             url: '/v1/flow/rule',
+            data: rule,
+            method: 'POST'
+        });
+    };*/
+
+    this.newRule = function (rule) {
+        var param = {
+            resource: rule.resource,
+            limitApp: rule.limitApp,
+            grade: rule.grade,
+            count: rule.count,
+            strategy: rule.strategy,
+            refResource: rule.refResource,
+            controlBehavior: rule.controlBehavior,
+            warmUpPeriodSec: rule.warmUpPeriodSec,
+            maxQueueingTimeMs: rule.maxQueueingTimeMs,
+            app: rule.app,
+            ip: rule.ip,
+            port: rule.port
+        };
+
+        return $http({
+            url: '/v2/flow/rule',
             data: rule,
             method: 'POST'
         });

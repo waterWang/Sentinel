@@ -88,7 +88,7 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
       });
     };
 
-    function saveFlowRule() {
+   /* function saveFlowRule() {
       if (!FlowService.checkRuleValid(flowRuleDialogScope.currentRule)) {
         return;
       }
@@ -103,6 +103,23 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
       }).error((data, header, config, status) => {
           alert('未知错误');
       });
+    }*/
+
+    function saveFlowRule() {
+        if (!FlowService.checkRuleValid(flowRuleDialogScope.currentRule)) {
+            return;
+        }
+        FlowService.newRule(flowRuleDialogScope.currentRule).success(function (data) {
+            if (data.code === 0) {
+                flowRuleDialog.close();
+                let url = '/dashboard/v2/flow/' + $scope.app;
+                $location.path(url);
+            } else {
+                alert('失败：' + data.msg);
+            }
+        }).error((data, header, config, status) => {
+            alert('未知错误');
+        });
     }
 
     function saveFlowRuleAndContinue() {

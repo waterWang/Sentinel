@@ -58,4 +58,19 @@ java -Dserver.port=8080 \
 客户端正确配置并启动后，会**在初次调用后**主动向控制台发送心跳包，汇报自己的存在；
 控制台收到客户端心跳包之后，会在左侧导航栏中显示该客户端信息。如果控制台能够看到客户端的机器信息，则表明客户端接入成功了。
 
-更多：[控制台功能介绍](./Sentinel_Dashboard_Feature.md)。
+
+## 4. 实现将配置从nacos中获取
+
+### 4.1 移动代码
+将 sentinel-dashboard/src/test/java/com/alibaba/csp/sentinel/dashboard/rule/nacos 目录整个拷贝到 sentinel-dashboard/src/main/java/com/alibaba/csp/sentinel/dashboard/rule/nacos
+
+启动时候，需要在jvm参数加上对应参数
+```shell
+java -Dserver.port=8081 -Dcsp.sentinel.dashboard.server=localhost:8081 -Dproject.name=sentinel-dashboard -Dsentinel.dashboard.nacos.server=localhost:8848 -Dsentinel.dashboard.nacos.namespace=44d3449d-8e6a-4f7a-8675-ca66534c367c -Dsentinel.dashboard.nacos.username=nacos -Dsentinel.dashboard.nacos.password=nacos -jar target/sentinel-dashboard.jar
+
+mvn clean package -Dmaven.test.skip=true
+```
+
+更多：
+[控制台功能介绍](./Sentinel_Dashboard_Feature.md)。
+[sentinel持久化到nacos](http://www.phpheidong.com/blog/article/45771/c1ccdc5b606c79ca0ae0/)。
