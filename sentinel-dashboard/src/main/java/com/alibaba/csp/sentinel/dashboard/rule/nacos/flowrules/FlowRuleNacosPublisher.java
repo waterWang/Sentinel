@@ -27,13 +27,17 @@ public class FlowRuleNacosPublisher implements DynamicRulePublisher<List<FlowRul
 
   @Override
   public void publish(String app, List<FlowRuleEntity> rules) throws Exception {
+
+    LOGGER.info("input app is {}  rules: {}", app, rules);
     AssertUtil.notEmpty(app, "app name cannot be empty");
     if (rules == null) {
       return;
     }
-    String convertedRule = converter.convert(rules);
-    LOGGER.info("sentinel dashboard publish flow rules: {}", convertedRule);
-    configService.publishConfig(app + NacosConfigUtil.FLOW_DATA_ID_POSTFIX,
-        NacosConfigUtil.GROUP_ID, convertedRule);
+    String dataId = app + NacosConfigUtil.FLOW_DATA_ID_POSTFIX;
+    String group = NacosConfigUtil.GROUP_ID;
+    String content = converter.convert(rules);
+    LOGGER.info("set  rules: {},dataId is {}, groupId is {}, content is {}", rules, dataId,
+        group, content);
+    configService.publishConfig(dataId, group, content);
   }
 }

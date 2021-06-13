@@ -66,7 +66,7 @@ java -Dserver.port=8080 \
 
 启动时候，需要在jvm参数加上对应参数
 ```shell
-java -Dserver.port=8081 -Dcsp.sentinel.dashboard.server=localhost:8081 -Dproject.name=sentinel-dashboard -Dsentinel.dashboard.nacos.server=localhost:8848 -Dsentinel.dashboard.nacos.namespace=44d3449d-8e6a-4f7a-8675-ca66534c367c -Dsentinel.dashboard.nacos.username=nacos -Dsentinel.dashboard.nacos.password=nacos -jar target/sentinel-dashboard.jar
+java -Dserver.port=8081 -Dcsp.sentinel.dashboard.server=localhost:8081 -Dproject.name=sentinel-dashboard -Dsentinel.dashboard.nacos.server=localhost:8848 -Dsentinel.dashboard.nacos.namespace=44d3449d-8e6a-4f7a-8675-ca66534c367c -Dsentinel.dashboard.nacos.username=nacos -Dsentinel.dashboard.nacos.password=nacos -jar sentinel-dashboard.jar
 
 mvn clean package -Dmaven.test.skip=true
 ```
